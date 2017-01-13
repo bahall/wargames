@@ -14,7 +14,7 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *   
+ *
  *   Contact the author at contact@fwei.tk
  */
 
@@ -69,7 +69,7 @@ static void fire_missile(struct location_t* city)
 
 /* calculate populations of US+USSR by totaling the populations of each of their cities */
 static void calc_pops(long long* us_pop, long long* ussr_pop)
-{ 
+{
   *us_pop=0;
   *ussr_pop=0;
   /* calculate populations */
@@ -206,7 +206,7 @@ static void do_first_strike(int side)
                           allLower(response);
                           remove_punct(response);
                           if(strcmp(response, "yes")==0 || strcmp(response, "y")==0)
-                            { 
+                            {
                               print_string("\nTARGET CONFIRMED.\n\n");
                               targets[num_targets_found]=&world[j];
                               ++num_targets_found;
@@ -284,7 +284,7 @@ static void do_missile_launch(int side)
                           allLower(response);
                           remove_punct(response);
                           if(strcmp(response, "yes")==0 || strcmp(response, "y")==0)
-                            { 
+                            {
                               print_string("\nTARGET CONFIRMED.\n\n");
                               targets[num_targets_found]=&world[j];
                               ++num_targets_found;
@@ -369,7 +369,7 @@ void global_thermonuclear_war(void)
       print_string(map[i]);
       print_string("\n");
     }
-  
+
   /* get the side the user wants to be on */
   print_string("\nWHICH SIDE DO YOU WANT?\n\n  1.  UNITED STATES\n  2.  SOVIET UNION\n\n");
   bool good=false;

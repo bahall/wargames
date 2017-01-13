@@ -14,7 +14,7 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *   
+ *
  *   Contact the author at contact@fwei.tk
  */
 
@@ -28,10 +28,10 @@
 
 void do_chatbot(void)
 {
-  int stage=0; /* stage 0: i'm fine how are you... -> 
-                  stage 1: people sometimes make mistakes -> 
-                  stage 2: love to. how about global thermonuclear war? -> 
-                  stage 3: no lets play global thermonuclear war -> 
+  int stage=0; /* stage 0: i'm fine how are you... ->
+                  stage 1: people sometimes make mistakes ->
+                  stage 2: love to. how about global thermonuclear war? ->
+                  stage 3: no lets play global thermonuclear war ->
                   stage 4: GLOBAL THERMONUCLEAR WAR!!! */
   while(1)
     {
@@ -77,7 +77,7 @@ void do_chatbot(void)
               for(int i=0;i<sizeof(stage3_triggers)/sizeof(const char*);++i)
                 {
                   if(strcmp(buf, stage3_triggers[i])==0)
-                    { 
+                    {
                       print_string("\n\nWOULDN'T YOU PREFER A GOOD GAME OF CHESS?\n\n");
                       ++stage;
                      valid=true;
@@ -127,4 +127,3 @@ void do_chatbot(void)
         } // else
     } // while
 }
-

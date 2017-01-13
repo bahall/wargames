@@ -14,7 +14,7 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *   
+ *
  *   Contact the author at contact@fwei.tk
  */
 
@@ -26,16 +26,15 @@
 #include <curses.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 
-void cleanup(int signum)
-{
+void cleanup(int signum) {
   endwin();
   exit(0);
 }
-void random_stuff(void) /* print random junk on the screen for about 3 seconds */
-{
+void random_stuff(void) { /* print random junk on the screen for about 3 seconds */
   clear();
   /* credit for this text goes to David Brownlee and Chirs Carter */
   print_string("#45 11456 11009 11893 11972 11315\nPRT CON. 3.4.5. SECTRAN 9.4.3. PORT STAT: SD-345\n\n(311) 699-7305\n");
@@ -45,8 +44,7 @@ void random_stuff(void) /* print random junk on the screen for about 3 seconds *
   usleep(100000);
   clear();
 }
-void be_joshua()
-{
+void be_joshua() {
   initscr();
   clear();
   signal(SIGINT, &cleanup);
@@ -55,40 +53,35 @@ void be_joshua()
   init_pair(1, COLOR_BLUE, COLOR_BLACK);
   attron(COLOR_PAIR(1));*/
   scrollok(stdscr, true);
-  bool gamesPhase=false;
+  bool gamesPhase = false;
   char buf[33];
   int maxx, maxy;
   getmaxyx(stdscr, maxy, maxx);
-  for(int i=0;i<maxx*2;++i)
-    {
-      print_string(" ");
-    }
+  for(int i = 0;i<maxx*2;++i) {
+    print_string(" ");
+  }
   do {
     if(!gamesPhase)
       print_string("LOGON: ");
     refresh();
-    int ret=getnstr(buf, 32);
+    int ret = getnstr(buf, 32);
     allLower(buf);
     usleep(SLEEP_TIME*100);
-    if(strcmp(buf, "help logon")==0 && !gamesPhase)
-      {
+    if(strcmp(buf, "help logon") == 0 && !gamesPhase) {
         print_string("\nHELP NOT AVAILABLE\n\n\n");
-      }
-    else if(strcmp(buf, "help games")==0)
-      {
+    }
+    else if(strcmp(buf, "help games") == 0 && !gamesPhase) {
         print_string("\n'GAMES' REFERS TO MODELS, SIMULATIONS AND GAMES\nWHICH HAVE TACTICAL AND STRATEGIC APPLICATIONS.\n\n\n");
-        gamesPhase=true;
-      }
-    else if(strcmp(buf, "list games")==0 && gamesPhase)
-      {
+    }
+    else if(strcmp(buf, "list games") == 0 && !gamesPhase) {
         print_string("\nFALKEN'S MAZE\nBLACK JACK\nGIN RUMMY\nHEARTS\nBRIDGE\nCHECKERS\nCHESS\nPOKER\nFIGHTER COMBAT\nGUERRILLA ENGAGEMENT\nDESERT WARFARE\nAIR-TO-GROUND ACTIONS\nTHEATERWIDE TACTICAL WARFARE\nTHEATERWIDE BIOTOXIC AND CHEMICAL WARFARE\n\nGLOBAL THERMONUCLEAR WAR\n\n\n");
-      }
-    else if(ret==ERR || strcmp(buf, "joshua") && !gamesPhase)
-      {
+    }
+    else if(ret == ERR || strcmp(buf, "joshua") && !gamesPhase) {
         print_string("\nIDENTIFICATION NOT RECOGNIZED BY SYSTEM\n--CONNECTION TERMINATED--");
-        return;
-      }
-  } while(strcmp(buf, "joshua") || gamesPhase);
+        gamesPhase = true;
+    }
+  }
+  while(strcmp(buf, "joshua") || gamesPhase);
   random_stuff();
   usleep(SLEEP_TIME*100);
   print_string("GREETINGS, PROFESSOR FALKEN.\n\n");
@@ -96,19 +89,16 @@ void be_joshua()
   getnstr(buf, 32);
   allLower(buf);
   remove_punct(buf);
-  for(int i=0;i<sizeof(exit_triggers)/sizeof(const char*);++i)
-    {
-      if(strcmp(buf, exit_triggers[i])==0)
-	{
+  for(int i = 0;i<sizeof(exit_triggers)/sizeof(const char*);++i) {
+    if(strcmp(buf, exit_triggers[i]) == 0) {
 	  print_string("\n\n");
 	  print_string(exit_responses[rand()%sizeof(exit_responses)/sizeof(const char*)]);
 	  print_string("\n--CONNECTION TERMINATED--");
 	  return;
-	}
     }
+  }
   print_string("\n\nHOW ARE YOU FEELING TODAY?\n\n");
   refresh();
   do_chatbot();
   endwin();
 }
-
