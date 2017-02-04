@@ -70,6 +70,15 @@ void be_joshua() {
     if(strcmp(buf, "help logon") == 0 && !gamesPhase) {
         print_string("\nHELP NOT AVAILABLE\n\n\n");
     }
+    else if(strcmp(buf, "brent") == 0 && !gamesPhase) {
+        random_stuff();
+        usleep(SLEEP_TIME*100);
+        print_string("GREETINGS MISTER HALL\n\n");
+        usleep(SLEEP_TIME*200);
+        print_string("I WILL LET YOU GET TO WORK NOW");
+        usleep(SLEEP_TIME*500);
+        return;
+    }
     else if(strcmp(buf, "help games") == 0 && !gamesPhase) {
         print_string("\n'GAMES' REFERS TO MODELS, SIMULATIONS AND GAMES\nWHICH HAVE TACTICAL AND STRATEGIC APPLICATIONS.\n\n\n");
     }
@@ -78,7 +87,8 @@ void be_joshua() {
     }
     else if(ret == ERR || strcmp(buf, "joshua") && !gamesPhase) {
         print_string("\nIDENTIFICATION NOT RECOGNIZED BY SYSTEM\n--CONNECTION TERMINATED--");
-        gamesPhase = true;
+        usleep(SLEEP_TIME*200);
+        return;
     }
   }
   while(strcmp(buf, "joshua") || gamesPhase);
